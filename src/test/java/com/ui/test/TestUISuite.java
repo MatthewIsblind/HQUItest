@@ -3,6 +3,7 @@ package com.ui.test;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -57,7 +58,7 @@ public class TestUISuite {
 
     @Test
     public void Formpage_popup(){
-        driver.get("https://d18u5zoaatmpxx.cloudfront.net/#/forms");
+        driver.findElement(By.cssSelector("[aria-label=forms")).click();
         driver.findElement(By.id("name")).sendKeys("Matthew");
         driver.findElement(By.id("email")).sendKeys("Matthew@mail.com");
 
@@ -65,7 +66,20 @@ public class TestUISuite {
         Actions action = new Actions(driver);
         action.moveToElement(checkbox).click().build().perform();
 
-        driver.findElement(By.cssSelector("#app > div.v-application--wrap > main > div > div > div.layout.justify-center.wrap > div > div > div.v-window.v-item-group.theme--light.v-tabs-items > div > div > div > div > form > button:nth-child(5)")).click();
+//        var QLDoption = driver.findElement(By.id("list-item-156-2"));
+//        driver.findElement(By.className("v-select__selections")).click();
+//        Actions dropboxAction = new Actions(driver);
+//        dropboxAction.moveToElement(QLDoption).click().build().perform();
+
+
+
+
+        for (WebElement currentElement: driver.findElements(By.tagName("button"))) {
+            if (currentElement.getText().equalsIgnoreCase("submit")) {
+                currentElement.click();
+                break;
+            }
+        }
 
         var popup = driver.findElement(By.className("popup-message"));
 
