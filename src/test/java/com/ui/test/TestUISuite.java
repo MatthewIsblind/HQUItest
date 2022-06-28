@@ -44,7 +44,7 @@ public class TestUISuite {
     public void Detect_button_movement(){
 
         Actions action = new Actions(driver);
-        //class="v-btn v-btn--block v-btn--contained theme--light v-size--default anibtn transition-y"
+        
         var ele = driver.findElement(By.cssSelector("#app > div.v-application--wrap > main > div > div > div:nth-child(3) > div:nth-child(2) > div:nth-child(3) > a"));
         var initial_location = ele.getLocation();
         ele.click();
@@ -88,10 +88,10 @@ public class TestUISuite {
 
     }
 
-//    @AfterEach
-//    public void tearDown() {
-//        driver.quit();
-//    }
+    @AfterEach
+    public void tearDown() {
+        driver.quit();
+    }
 
 
 
