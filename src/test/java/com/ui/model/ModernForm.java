@@ -7,12 +7,12 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ModernForm{
+public class ModernForm extends Form{
 
     private WebDriver driver;
 
     public ModernForm(WebDriver driver) {
-        //super(driver);
+        super(driver);
         this.driver = driver;
     }
 

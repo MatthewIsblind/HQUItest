@@ -14,7 +14,7 @@ public abstract class Form {
 
     public void clickSpecificButton(By byLocator, String buttonBodyText) {
         for (WebElement tabs : driver.findElements(byLocator)){
-            System.out.println(tabs.getText());
+
             if (tabs.getText().equalsIgnoreCase(buttonBodyText)){
                 tabs.click();
             }

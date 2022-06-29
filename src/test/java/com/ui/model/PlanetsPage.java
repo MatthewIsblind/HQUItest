@@ -1,5 +1,6 @@
 package com.ui.model;
 
+import com.ui.strategies.MatchingStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,15 +21,16 @@ public class PlanetsPage {
 
     }
 
-    public void clickPlanetButton(String planetName) {
-        for (Planet planet: getPlanets()){
-            if(planet.getName().equalsIgnoreCase(planetName)) {
+
+    public void clickExplore(MatchingStrategy strategy){
+        for (Planet planet : getPlanets()) {
+            if(strategy.match(planet)) {
                 planet.clickExplore();
                 waitForPopupMessage();
                 break;
             }
-        }
 
+        }
     }
 
     private void waitForPopupMessage() {
@@ -58,15 +60,5 @@ public class PlanetsPage {
     }
 
 
-    public void clickPlanetUsingRadius(double planetRadiusFormat) {
-        for (Planet planet : getPlanets()) {
-            if(planet.getPlanetradius() == planetRadiusFormat) {
-                planet.clickExplore();
-                waitForPopupMessage();
-                break;
-            }
 
-        }
-
-    }
 }

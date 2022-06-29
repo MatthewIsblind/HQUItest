@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +35,8 @@ public class Planet {
 
         raidusText = raidusText.replace(" km","");
         raidusText = raidusText.replace(",","");
-        System.out.println(raidusText);
+
+        //NumberFormat.getInstance().parse(raidusText).doubleValue();
         return Double.parseDouble(raidusText);
     }
 }

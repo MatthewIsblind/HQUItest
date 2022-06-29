@@ -3,10 +3,11 @@ package com.ui.test;
 import com.ui.model.ModernForm;
 import com.ui.model.PlanetsPage;
 import com.ui.model.TraditionalForm;
+import com.ui.strategies.NameMatchingStrategy;
+import com.ui.strategies.RadiusMatchingStrategy;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -96,7 +97,9 @@ public class TestUISuite {
         driver.findElement(By.cssSelector("[aria-label=planets]")).click();
 
         var planetsPage = new PlanetsPage(driver);
-        planetsPage.clickPlanetButton("Earth");
+        planetsPage.clickExplore(new NameMatchingStrategy("Earth"));
+
+        // planetsPage.clickPlanetButtonByName("Earth");
         
         Assertions.assertEquals("Exploring Earth",planetsPage.getPopUp());
     }
@@ -104,12 +107,18 @@ public class TestUISuite {
 
     @Test
     public void VerifyExploreSaturnRadius() {
+        //arrange
         driver.findElement(By.cssSelector("[aria-label=planets]")).click();
-        var planetsPage = new PlanetsPage(driver);
-        planetsPage.clickPlanetUsingRadius(58232);
 
+        //act
+        var planetsPage = new PlanetsPage(driver);
+        planetsPage.clickExplore(new RadiusMatchingStrategy(58232));
+
+        //assert
         Assertions.assertEquals("Exploring Saturn",planetsPage.getPopUp());
     }
+
+
 
     @AfterEach
     public void tearDown() {

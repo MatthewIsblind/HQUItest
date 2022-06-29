@@ -17,7 +17,7 @@ public class TraditionalForm extends Form {
 
     public void clickTraditional() {
         for (WebElement tabs : driver.findElements(By.cssSelector("[role=tab]"))){
-            System.out.println(tabs.getText());
+
             if (tabs.getText().equalsIgnoreCase("Traditional")){
                 tabs.click();
             }
