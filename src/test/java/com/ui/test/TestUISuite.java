@@ -113,7 +113,9 @@ public class TestUISuite {
 
         //act
         var planetsPage = new PlanetsPage(driver);
-        planetsPage.clickExplore(new RadiusMatchingStrategy(58232));
+        
+
+        planetsPage.clickExplore(planet -> planet.getPlanetradius() == 58232);
 
         //assert
         Assertions.assertEquals("Exploring Saturn",planetsPage.getPopUp());
@@ -129,6 +131,8 @@ public class TestUISuite {
         //act
         var planetsPage = new PlanetsPage(driver);
         planetsPage.clickExplore(new SunDistanceMatchingStrategy(778500000L));
+
+
 
         //assert
         Assertions.assertEquals("Exploring Jupiter",planetsPage.getPopUp());
