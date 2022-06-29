@@ -5,6 +5,7 @@ import com.ui.model.PlanetsPage;
 import com.ui.model.TraditionalForm;
 import com.ui.strategies.NameMatchingStrategy;
 import com.ui.strategies.RadiusMatchingStrategy;
+import com.ui.strategies.SunDistanceMatchingStrategy;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -118,6 +119,21 @@ public class TestUISuite {
         Assertions.assertEquals("Exploring Saturn",planetsPage.getPopUp());
     }
 
+
+    @Test
+    public void VerifyExploreEarthDistanceFromSun() {
+
+        //arrange
+        driver.findElement(By.cssSelector("[aria-label=planets]")).click();
+
+        //act
+        var planetsPage = new PlanetsPage(driver);
+        planetsPage.clickExplore(new SunDistanceMatchingStrategy(778500000L));
+
+        //assert
+        Assertions.assertEquals("Exploring Jupiter",planetsPage.getPopUp());
+
+    }
 
 
     @AfterEach

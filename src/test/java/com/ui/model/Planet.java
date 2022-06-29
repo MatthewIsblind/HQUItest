@@ -39,4 +39,14 @@ public class Planet {
         //NumberFormat.getInstance().parse(raidusText).doubleValue();
         return Double.parseDouble(raidusText);
     }
+
+    public long getDistanceFromSun() {
+        String raidusText = this.webelement.findElement(By.className("distance")).getText();
+
+        raidusText = raidusText.replace(" km","");
+        raidusText = raidusText.replace(",","");
+
+
+        return Long.parseLong(raidusText);
+    }
 }
