@@ -16,7 +16,6 @@ public class Planet {
     private WebElement webelement;
 
     public Planet(WebElement planetWebElement){
-
         this.webelement = planetWebElement;
 
     }
@@ -28,5 +27,14 @@ public class Planet {
 
     public void clickExplore() {
         this.webelement.findElement(By.tagName("button")).click();
+    }
+
+    public Double getPlanetradius() {
+        String raidusText = this.webelement.findElement(By.className("radius")).getText();
+
+        raidusText = raidusText.replace(" km","");
+        raidusText = raidusText.replace(",","");
+        System.out.println(raidusText);
+        return Double.parseDouble(raidusText);
     }
 }

@@ -1,10 +1,12 @@
 package com.ui.test;
 
-import com.ui.model.Form;
+import com.ui.model.ModernForm;
 import com.ui.model.PlanetsPage;
+import com.ui.model.TraditionalForm;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -57,7 +59,7 @@ public class TestUISuite {
     public void VerifySubmitPopup(){
         driver.findElement(By.cssSelector("[aria-label=forms]")).click();
 
-        var form = new Form(driver);
+        var form = new ModernForm(driver);
         form.setNameField("Matthew");
         form.setEmailField("Matthew@mail.com");
         form.selectState("SA");
@@ -69,11 +71,24 @@ public class TestUISuite {
 
     }
 
-//    @Test
-//    public void VerifyTraditionalSumbit(){
-//        driver.findElement(By.cssSelector("[aria-label=forms]")).click();
-//        driver.findElement(By.cssSelector("[aria-selected=true]")).click();
-//    }
+
+
+    public void VerifyTraditionalSumbit(){
+        driver.findElement(By.cssSelector("[aria-label=forms]")).click();
+
+        TraditionalForm form = new TraditionalForm(driver);
+
+        form.clickTraditional();
+
+
+        driver.findElement(By.id("address")).sendKeys("20 netflix road,net,1234");
+        driver.findElement(By.id("gender")).click();
+        new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeSelected(By.cssSelector("[value=M]")));
+        driver.findElement(By.cssSelector("value=M")).click();
+        driver.findElement(By.id("allow")).click();
+
+
+    }
 
 
     @Test
@@ -83,9 +98,18 @@ public class TestUISuite {
         var planetsPage = new PlanetsPage(driver);
         planetsPage.clickPlanetButton("Earth");
         
-        Assertions.assertEquals("Exploring Earth",planetsPage.getEarthPopUp());
+        Assertions.assertEquals("Exploring Earth",planetsPage.getPopUp());
     }
 
+
+    @Test
+    public void VerifyExploreSaturnRadius() {
+        driver.findElement(By.cssSelector("[aria-label=planets]")).click();
+        var planetsPage = new PlanetsPage(driver);
+        planetsPage.clickPlanetUsingRadius(58232);
+
+        Assertions.assertEquals("Exploring Saturn",planetsPage.getPopUp());
+    }
 
     @AfterEach
     public void tearDown() {

@@ -21,7 +21,6 @@ public class PlanetsPage {
     }
 
     public void clickPlanetButton(String planetName) {
-
         for (Planet planet: getPlanets()){
             if(planet.getName().equalsIgnoreCase(planetName)) {
                 planet.clickExplore();
@@ -39,13 +38,11 @@ public class PlanetsPage {
 
 
     public ArrayList<Planet> getPlanets(){
-        ArrayList<Planet> planetList = new ArrayList<>();
+        ArrayList<Planet> planetList = new ArrayList<Planet>();
 
-        for (WebElement planetwebElement :driver.findElements(By.className(("planet")))){
-
-
-            Planet webelementPlanet = new Planet(planetwebElement);
-            planetList.add(webelementPlanet);
+        for (WebElement planetWebElement : driver.findElements(By.className(("planet")))){
+            Planet webElementPlanet = new Planet(planetWebElement);
+            planetList.add(webElementPlanet);
         }
 
         return planetList;
@@ -53,14 +50,23 @@ public class PlanetsPage {
 
 
 
-
-    public String getEarthPopUp() {
+    public String getPopUp() {
         var messageIdentifier = By.className("popup-message");
         var popup = driver.findElement(messageIdentifier);
         new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(messageIdentifier));
         return popup.getText();
-
     }
 
 
+    public void clickPlanetUsingRadius(double planetRadiusFormat) {
+        for (Planet planet : getPlanets()) {
+            if(planet.getPlanetradius() == planetRadiusFormat) {
+                planet.clickExplore();
+                waitForPopupMessage();
+                break;
+            }
+
+        }
+
+    }
 }
