@@ -60,31 +60,24 @@ public class TestUISuite {
 
     @Test
     public void VerifySubmitPopup(){
-        driver.findElement(By.cssSelector("[aria-label=forms")).click();
+        driver.findElement(By.cssSelector("[aria-label=forms]")).click();
 
         var form = new Form(driver);
-        form.updateNameField("Matthew");
-        form.updateEmailField("Matthew@mail.com");
+        form.setNameField("Matthew");
+        form.setEmailField("Matthew@mail.com");
+        form.selectState("SA");
         form.clickAgree();
+
         form.clickSubmit();
-
-
         Assertions.assertEquals("Thanks for your feedback Matthew", form.getPopupText());
 
-//        driver.findElement(By.className("v-select__selections")).click();
 
-//        driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
-//        var QLDoption = driver.findElement(By.id("list-item-156-2"));
-//        Actions dropboxAction = new Actions(driver);
-//        dropboxAction.moveToElement(QLDoption).click().build().perform();
+    }
 
-
-
-
-
-
-
-
+    @Test
+    public void VerifyTraditionalSumbit(){
+        driver.findElement(By.cssSelector("[aria-label=forms]")).click();
+        driver.findElement(By.cssSelector("[aria-selected=true]")).click();
     }
 
     @AfterEach

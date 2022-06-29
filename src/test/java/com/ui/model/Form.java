@@ -16,11 +16,11 @@ public class Form {
     }
 
 
-    public void updateNameField(String name) {
+    public void setNameField(String name) {
         driver.findElement(By.id("name")).sendKeys(name);
     }
 
-    public void updateEmailField(String email) {
+    public void setEmailField(String email) {
         driver.findElement(By.id("email")).sendKeys(email);
     }
 
@@ -37,6 +37,7 @@ public class Form {
                 break;
             }
         }
+
     }
 
 
@@ -44,5 +45,18 @@ public class Form {
         var popup = driver.findElement(By.className("popup-message"));
         new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOfElementLocated(By.className("popup-message")));
         return popup.getText();
+    }
+
+    public void selectState(String state) {
+        driver.findElement(By.className("v-select__selections")).click();
+        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[role=option]")));
+        for (WebElement givenState:driver.findElements(By.cssSelector("[role=option]"))) {
+            if (givenState.getText().equalsIgnoreCase(state)) {
+                givenState.click();
+                break;
+            }
+        }
+
+
     }
 }
