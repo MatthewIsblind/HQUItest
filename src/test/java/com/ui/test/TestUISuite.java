@@ -1,7 +1,7 @@
 package com.ui.test;
 
 import com.ui.model.Form;
-import com.ui.model.Planets;
+import com.ui.model.PlanetsPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -80,10 +80,10 @@ public class TestUISuite {
     public void VerifyExplorePlanetEarth(){
         driver.findElement(By.cssSelector("[aria-label=planets]")).click();
 
-        var planets = new Planets(driver);
-        planets.clickPlanetButton("Earth");
+        var planetsPage = new PlanetsPage(driver);
+        planetsPage.clickPlanetButton("Earth");
         
-        Assertions.assertEquals("Exploring Earth",planets.getEarthPopUp());
+        Assertions.assertEquals("Exploring Earth",planetsPage.getEarthPopUp());
     }
 
 
