@@ -41,7 +41,7 @@ public class Form {
     }
 
 
-    public String getPopupText() {
+    public String getFormPopupText() {
         var popup = driver.findElement(By.className("popup-message"));
         new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOfElementLocated(By.className("popup-message")));
         return popup.getText();
@@ -59,4 +59,6 @@ public class Form {
 
 
     }
+
+
 }

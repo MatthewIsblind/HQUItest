@@ -1,19 +1,14 @@
 package com.ui.test;
 
 import com.ui.model.Form;
+import com.ui.model.Planets;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -69,21 +64,35 @@ public class TestUISuite {
         form.clickAgree();
 
         form.clickSubmit();
-        Assertions.assertEquals("Thanks for your feedback Matthew", form.getPopupText());
+        Assertions.assertEquals("Thanks for your feedback Matthew", form.getFormPopupText());
 
 
     }
+
+//    @Test
+//    public void VerifyTraditionalSumbit(){
+//        driver.findElement(By.cssSelector("[aria-label=forms]")).click();
+//        driver.findElement(By.cssSelector("[aria-selected=true]")).click();
+//    }
+
 
     @Test
-    public void VerifyTraditionalSumbit(){
-        driver.findElement(By.cssSelector("[aria-label=forms]")).click();
-        driver.findElement(By.cssSelector("[aria-selected=true]")).click();
+    public void VerifyExplorePlanetEarth(){
+        driver.findElement(By.cssSelector("[aria-label=planets]")).click();
+
+        var planets = new Planets(driver);
+        planets.clickPlanetButton("Earth");
+        
+        Assertions.assertEquals("Exploring Earth",planets.getEarthPopUp());
     }
+
 
     @AfterEach
     public void tearDown() {
         driver.quit();
     }
+
+
 
 
 
