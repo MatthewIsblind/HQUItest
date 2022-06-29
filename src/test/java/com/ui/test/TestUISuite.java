@@ -1,6 +1,7 @@
 package com.ui.test;
 
 import com.ui.model.ModernForm;
+import com.ui.model.Planet;
 import com.ui.model.PlanetsPage;
 import com.ui.model.TraditionalForm;
 import com.ui.strategies.NameMatchingStrategy;
@@ -98,7 +99,7 @@ public class TestUISuite {
         driver.findElement(By.cssSelector("[aria-label=planets]")).click();
 
         var planetsPage = new PlanetsPage(driver);
-        planetsPage.clickExplore(new NameMatchingStrategy("Earth"));
+        planetsPage.clickExplore(p -> p.getName().equalsIgnoreCase("earth"));
 
         // planetsPage.clickPlanetButtonByName("Earth");
         
@@ -113,7 +114,7 @@ public class TestUISuite {
 
         //act
         var planetsPage = new PlanetsPage(driver);
-        
+
 
         planetsPage.clickExplore(planet -> planet.getPlanetradius() == 58232);
 
@@ -130,8 +131,9 @@ public class TestUISuite {
 
         //act
         var planetsPage = new PlanetsPage(driver);
-        planetsPage.clickExplore(new SunDistanceMatchingStrategy(778500000L));
+        //planetsPage.clickExplore(new SunDistanceMatchingStrategy(778500000L));
 
+        planetsPage.clickExplore(planet -> planet.getDistanceFromSun() == 778500000L);
 
 
         //assert
@@ -154,6 +156,21 @@ public class TestUISuite {
 
     }
 
+
+
+    @Test
+    public void VerifyRadius58232() {
+        //arrange
+        driver.findElement(By.cssSelector("[aria-label=planets]")).click();
+
+        //act
+        var planetsPage = new PlanetsPage(driver);
+        Planet planet = planetsPage.exploreWithLambda(p -> p.getPlanetradius() == 58232);
+        planet.clickExplore();
+
+        //assert
+        Assertions.assertEquals("Exploring Saturn",planetsPage.getPopUp());
+    }
 
     @AfterEach
     public void tearDown() {

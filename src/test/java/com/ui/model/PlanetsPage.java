@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.function.Predicate;
 
 public class PlanetsPage {
 
@@ -22,9 +24,9 @@ public class PlanetsPage {
     }
 
 
-    public void clickExplore(MatchingStrategy strategy){
+    public void clickExplore(Predicate<Planet> strategy){
         for (Planet planet : getPlanets()) {
-            if(strategy.match(planet)) {
+            if(strategy.test(planet)) {
                 planet.clickExplore();
                 waitForPopupMessage();
                 break;
@@ -77,5 +79,17 @@ public class PlanetsPage {
         furthestPlanet.clickExplore();
 
 
+    }
+
+    public Planet exploreWithLambda(Predicate<Planet> testLogic) {
+        for (WebElement planetElement : driver.findElements(By.className("planet"))) {
+            var planet = new Planet(planetElement);
+            if (testLogic.test(planet)){
+                return planet;
+            }
+
+        }
+
+        throw new NoSuchElementException("no such planet");
     }
 }
