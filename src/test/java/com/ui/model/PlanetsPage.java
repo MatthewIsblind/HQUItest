@@ -1,6 +1,5 @@
 package com.ui.model;
 
-import com.ui.strategies.MatchingStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,20 +21,6 @@ public class PlanetsPage {
 
 
     }
-
-
-    public void clickExplore(Predicate<Planet> strategy){
-        for (Planet planet : getPlanets()) {
-            if(strategy.test(planet)) {
-                planet.clickExplore();
-                waitForPopupMessage();
-                break;
-            }
-
-        }
-    }
-
-
 
 
     private void waitForPopupMessage() {

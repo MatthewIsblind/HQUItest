@@ -4,9 +4,6 @@ import com.ui.model.ModernForm;
 import com.ui.model.Planet;
 import com.ui.model.PlanetsPage;
 import com.ui.model.TraditionalForm;
-import com.ui.strategies.NameMatchingStrategy;
-import com.ui.strategies.RadiusMatchingStrategy;
-import com.ui.strategies.SunDistanceMatchingStrategy;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -99,9 +96,9 @@ public class TestUISuite {
         driver.findElement(By.cssSelector("[aria-label=planets]")).click();
 
         var planetsPage = new PlanetsPage(driver);
-        planetsPage.clickExplore(p -> p.getName().equalsIgnoreCase("earth"));
+        Planet planet = planetsPage.exploreWithLambda(p -> p.getName().equalsIgnoreCase("earth"));
+        planet.clickExplore();
 
-        // planetsPage.clickPlanetButtonByName("Earth");
         
         Assertions.assertEquals("Exploring Earth",planetsPage.getPopUp());
     }
@@ -114,9 +111,9 @@ public class TestUISuite {
 
         //act
         var planetsPage = new PlanetsPage(driver);
+        Planet planet = planetsPage.exploreWithLambda(p -> p.getPlanetradius() == 58232);
+        planet.clickExplore();
 
-
-        planetsPage.clickExplore(planet -> planet.getPlanetradius() == 58232);
 
         //assert
         Assertions.assertEquals("Exploring Saturn",planetsPage.getPopUp());
@@ -131,9 +128,8 @@ public class TestUISuite {
 
         //act
         var planetsPage = new PlanetsPage(driver);
-        //planetsPage.clickExplore(new SunDistanceMatchingStrategy(778500000L));
-
-        planetsPage.clickExplore(planet -> planet.getDistanceFromSun() == 778500000L);
+        Planet planet = planetsPage.exploreWithLambda(p -> p.getDistanceFromSun() == 778500000L);
+        planet.clickExplore();
 
 
         //assert
