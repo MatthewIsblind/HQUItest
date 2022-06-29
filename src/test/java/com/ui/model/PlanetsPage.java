@@ -33,6 +33,9 @@ public class PlanetsPage {
         }
     }
 
+
+
+
     private void waitForPopupMessage() {
         new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.className("popup-message")));
 
@@ -60,5 +63,19 @@ public class PlanetsPage {
     }
 
 
+    public void clickLongestDistanceFromSun() {
+        long distance = 0L;
+        Planet furthestPlanet = null;
+        for (Planet planet : getPlanets()) {
+            if (planet.getDistanceFromSun() > distance){
+                distance = planet.getDistanceFromSun();
+                furthestPlanet = planet;
+            }
 
+        }
+
+        furthestPlanet.clickExplore();
+
+
+    }
 }

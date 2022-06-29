@@ -135,6 +135,21 @@ public class TestUISuite {
 
     }
 
+    @Test
+    public void ExplorePlanetWithLongestDistanceFromSun() {
+
+        //arrange
+        driver.findElement(By.cssSelector("[aria-label=planets]")).click();
+
+        //act
+        var planetsPage = new PlanetsPage(driver);
+        planetsPage.clickLongestDistanceFromSun();
+
+        //assert
+        Assertions.assertEquals("Exploring Uranus",planetsPage.getPopUp());
+
+    }
+
 
     @AfterEach
     public void tearDown() {
