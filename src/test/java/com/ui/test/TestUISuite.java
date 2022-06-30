@@ -177,12 +177,23 @@ public class TestUISuite {
         //assert
         Assertions.assertEquals(209.97,homePage.getProductSubtotal("Levi 501s classic denim"));
 
-
     }
-//    @AfterEach
-//    public void tearDown() {
-//        driver.quit();
-//    }
+
+    @Test
+    public void VerifyMultipleProductTotal() {
+
+        HomePage homePage = new HomePage(driver);
+        homePage.setProductQuantity(4, "Levi 501s classic denim");
+        homePage.setProductQuantity(5,"Plain crewneck T-shirt (white)");
+
+        Assertions.assertEquals(379.91,homePage.getProductTotal());
+    }
+
+
+    @AfterEach
+    public void tearDown() {
+        driver.quit();
+    }
 
 
 

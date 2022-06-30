@@ -30,22 +30,37 @@ public class HomePage {
             }
         }
 
-
     }
 
-    public double getProductSubtotal(String productName) {
-
+    public Product setProductInfo(String productName) {
         List<WebElement> tableCells = driver.findElements(By.tagName("td"));
         for(int i = 0; i < tableCells.size() ; i++) {
             WebElement cell = tableCells.get(i);
             if (cell.getText().equalsIgnoreCase(productName)) {
-                System.out.println(cell.getText());
-                System.out.println(tableCells.get(i + 2).getText());
-                return Double.parseDouble(tableCells.get(i + 2).getText());
-
+                double price = Double.parseDouble(tableCells.get(i+1).getText());
+                Product product = new Product(price,cell.getText());
+                return product;
             }
         }
 
         throw new NoSuchElementException("no such product");
+    }
+
+    public double getProductSubtotal(String productName) {
+        List<WebElement> tableCells = driver.findElements(By.tagName("td"));
+        for(int i = 0; i < tableCells.size() ; i++) {
+            WebElement cell = tableCells.get(i);
+            if (cell.getText().equalsIgnoreCase(productName)) {
+                return Double.parseDouble(tableCells.get(i + 2).getText());
+            }
+        }
+
+        throw new NoSuchElementException("no such product");
+    }
+
+    public double getProductTotal() {
+        String priceText = driver.findElement(By.className("cart-total")).getText();
+        priceText = priceText.replace("$","");
+        return Double.parseDouble(priceText);
     }
 }
