@@ -1,9 +1,6 @@
 package com.ui.test;
 
-import com.ui.model.ModernForm;
-import com.ui.model.Planet;
-import com.ui.model.PlanetsPage;
-import com.ui.model.TraditionalForm;
+import com.ui.model.*;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -168,10 +165,24 @@ public class TestUISuite {
         Assertions.assertEquals("Exploring Saturn",planetsPage.getPopUp());
     }
 
-    @AfterEach
-    public void tearDown() {
-        driver.quit();
+
+    @Test
+    public void VerifyLeviSubtotal(){
+        //arrange
+
+        //act
+        HomePage homePage = new HomePage(driver);
+        homePage.setProductQuantity(3 , "Levi 501s classic denim");
+
+        //assert
+        Assertions.assertEquals(209.97,homePage.getProductSubtotal("Levi 501s classic denim"));
+
+
     }
+//    @AfterEach
+//    public void tearDown() {
+//        driver.quit();
+//    }
 
 
 

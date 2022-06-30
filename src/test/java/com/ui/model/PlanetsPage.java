@@ -45,7 +45,7 @@ public class PlanetsPage {
     public String getPopUp() {
         var messageIdentifier = By.className("popup-message");
         var popup = driver.findElement(messageIdentifier);
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(messageIdentifier));
+        new WebDriverWait(driver , 5).until(driver1 -> driver1.findElement(By.className("popup-message")).isDisplayed());
         return popup.getText();
     }
 
